@@ -1,9 +1,10 @@
 import React from "react";
+import "../styles/Register.scss";
 
 const RegisterPage = () => {
   return (
     <div className="register">
-      <div className="register_content">
+      <div className="register_container">
         <form>
           <input placeholder="First Name" name="firstname" required />
           <input placeholder="Last Name" name="lastname" required />
@@ -21,12 +22,18 @@ const RegisterPage = () => {
             required
           />
           <input
+            id="image"
             type="file"
             name="profileImage"
             accept="image/*"
             style={{ display: "none" }}
             required
           />
+          <label htmlFor="image">
+            <img src="/assets/addImg.png" alt="add profile photo" />
+            <p>Upload Your Photo</p>
+          </label>
+          <button type="submit">Register</button>
         </form>
         <span>Already have an account? </span>
         <a href="/login">Log In Here</a>
