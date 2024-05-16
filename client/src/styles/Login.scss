@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url("../../public/assets/login.jpg") center;
+  background: url("../assets/register.jpg") center;
   background-size: cover;
 
   &_content {
@@ -17,7 +17,7 @@
     gap: 15px;
     width: 40%;
     padding: 40px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(6, 28, 25, 0.8);
     border-radius: 20px;
 
     @include lg {
@@ -72,6 +72,13 @@
       margin-top: 20px;
     }
 
+    span{
+      color: rgb(239, 8, 58);
+      font-size: 13px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
     a {
       text-decoration: none;
       color: white;
@@ -81,6 +88,8 @@
 
       &:hover {
         text-decoration: underline;
+        color: rgb(239, 8, 58);
+
       }
     }
 
