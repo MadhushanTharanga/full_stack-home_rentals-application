@@ -4,8 +4,8 @@ import "../styles/Register.scss";
 const RegisterPage = () => {
   return (
     <div className="register">
-      <div className="register_cont">
-        <form className="register_cont_form">
+      <div className="register__container">
+        <form className="register__form">
           <input placeholder="First Name" name="firstname" required />
           <input placeholder="Last Name" name="lastname" required />
           <input placeholder="Email Name" name="email" type="email" required />
@@ -30,7 +30,7 @@ const RegisterPage = () => {
             required
           />
           <label htmlFor="image">
-            <img src="/assets/addImg.png" alt="add profile photo" />
+            <img src="../src/assets/addImg.png" alt="add profile photo" />
             <p>Upload Your Photo</p>
           </label>
           <button type="submit">Register</button>

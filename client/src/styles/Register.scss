@@ -8,16 +8,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url("../../public/assets/register.jpg") center;
+  background: url("../assets/register.jpg") center;
   background-size: cover;
 
-  &_content {
+  &__container {
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 40%;
     padding: 40px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(167, 3, 3, 0.8);
     border-radius: 20px;
 
     @include lg {
@@ -28,7 +28,7 @@
       width: 80%;
     }
 
-    &_form {
+    &__form {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -39,13 +39,13 @@
         padding: 7px 15px;
         background-color: transparent;
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 6px solid rgba(27, 181, 40, 0.3);
         outline: none;
         text-align: center;
         color: white;
 
         &:not(:placeholder-shown):focus {
-          background: transparent; /* or background: none; */
+          background: transparent;
         }
 
         &::placeholder {
@@ -70,7 +70,6 @@
 
       button {
         margin-top: 15px;
-
         @include buttonStyle;
         width: 50%;
 
