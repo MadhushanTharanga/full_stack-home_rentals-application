@@ -4,8 +4,8 @@ import "../styles/Register.scss";
 const RegisterPage = () => {
   return (
     <div className="register">
-      <div className="register_container">
-        <form>
+      <div className="register_cont">
+        <form className="register_cont_form">
           <input placeholder="First Name" name="firstname" required />
           <input placeholder="Last Name" name="lastname" required />
           <input placeholder="Email Name" name="email" type="email" required />
