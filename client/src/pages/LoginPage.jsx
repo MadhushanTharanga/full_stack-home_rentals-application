@@ -24,8 +24,8 @@ const LoginPage = () => {
             required
           />
           <button type="submit">LOG IN</button>
-        </form>
-        <span>Don't have an account? <br /> <a href="/register">SignUp Here</a> </span>
+        </form> <br />
+        <span>Don't have an account? <br />  <a href="/register">SignUp Here</a> </span>
 
       </div>
     </div>
