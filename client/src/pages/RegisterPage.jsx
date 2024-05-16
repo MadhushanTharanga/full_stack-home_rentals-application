@@ -122,7 +122,8 @@ const RegisterPage = () => {
           )}
           <button type="submit" disabled={!passwordMatch}>REGISTER</button>
         </form>
-        <a href="/login">Already have an account? Log In Here</a>
+        <span>Already have an account? <br /> <a href="/login">Login Here</a> </span>
+        
       </div>
     </div>
   );
