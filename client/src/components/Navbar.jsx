@@ -1,6 +1,21 @@
-import React from "react";
-
+import { IconButton } from "@mui/material";
+import { Search, Person, Menu } from "@mui/icons-material";
+import variables from "../styles/variables.scss";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import "../styles/Navbar.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { setLogout } from "../redux/state";
 const Navbar = () => {
+    const [dropdownMenu, setDropdownMenu] = useState(false);
+
+    const user = useSelector((state) => state.user);
+  
+    const dispatch = useDispatch();
+  
+    const [search, setSearch] = useState("")
+  
+    const navigate = useNavigate()
   return (
     <div>
       <a href="/">
@@ -51,6 +66,31 @@ const Navbar = () => {
             />
           )}
         </button>
+        {dropdownMenu && !user && (
+          <div className="navbar_right_accountmenu">
+            <Link to="/login">Log In</Link>
+            <Link to="/register">Sign Up</Link>
+          </div>
+        )}
+
+        {dropdownMenu && user && (
+          <div className="navbar_right_accountmenu">
+            <Link to={`/${user._id}/trips`}>Trip List</Link>
+            <Link to={`/${user._id}/wishList`}>Wish List</Link>
+            <Link to={`/${user._id}/properties`}>Property List</Link>
+            <Link to={`/${user._id}/reservations`}>Reservation List</Link>
+            <Link to="/create-listing">Become A Host</Link>
+
+            <Link
+              to="/login"
+              onClick={() => {
+                dispatch(setLogout());
+              }}
+            >
+              Log Out
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
