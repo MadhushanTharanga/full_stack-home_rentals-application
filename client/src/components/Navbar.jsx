@@ -32,6 +32,25 @@ const Navbar = () => {
             Become A Host
           </a>
         )}
+
+        <button
+          className="navbar_right_account"
+          onClick={() => setDropdownMenu(!dropdownMenu)}
+        >
+          <Menu sx={{ color: variables.darkgrey }} />
+          {!user ? (
+            <Person sx={{ color: variables.darkgrey }} />
+          ) : (
+            <img
+              src={`http://localhost:3001/${user.profileImagePath.replace(
+                "public",
+                ""
+              )}`}
+              alt="profile photo"
+              style={{ objectFit: "cover", borderRadius: "50%" }}
+            />
+          )}
+        </button>
       </div>
     </div>
   );
