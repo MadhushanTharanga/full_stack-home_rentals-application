@@ -13,12 +13,25 @@ const Navbar = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-          <IconButton disabled={search === ""}>
+        <IconButton disabled={search === ""}>
           <Search
             sx={{ color: variables.pinkred }}
-            onClick={() => {navigate(`/properties/search/${search}`)}}
+            onClick={() => {
+              navigate(`/properties/search/${search}`);
+            }}
           />
         </IconButton>
+      </div>
+      <div className="navbar_right">
+        {user ? (
+          <a href="/create-listing" className="host">
+            Become A Host
+          </a>
+        ) : (
+          <a href="/login" className="host">
+            Become A Host
+          </a>
+        )}
       </div>
     </div>
   );
