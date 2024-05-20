@@ -16,7 +16,7 @@ const upload = multer({ storage });
 
 
 router.post("/create", upload.array("listingPhotos"), async (req, res) => {
-    try{
+    try {
 
         const {
             creator,
@@ -36,12 +36,12 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
             description,
             highlight,
             highlightDesc,
-            price 
+            price
         } = req.body;
 
         const listingPhotos = req.files
 
-        if(!listingPhotos) {
+        if (!listingPhotos) {
             return res.status(400).send("Please add a listing photo");
         }
 
@@ -72,7 +72,7 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
         await newListing.save();
         res.status(200).json(newListing);
 
-    } catch(err) {
+    } catch (err) {
         res.status(500).json({ message: "Error uploading photos" });
         console.log(err);
     }
@@ -88,25 +88,48 @@ router.get("/", async (req, res) => {
             listings = await Listing.find().populate("creator");
         }
         res.status(200).json(listings);
-        
+
     } catch (err) {
         res.status(500).json({ message: "Error retrieving listings" });
         console.log(err);
     }
 })
 
+router.get("/search/:search", async (req, res) => {
+    const { search } = req.params;
+
+    try {
+        let listings = [];
+
+        if (search === "all") {
+            listings = await Listing.find().populate("creator");
+        } else {
+            listings = await Listing.find({
+                $or: [
+                    { category: { $regex: search, $options: "i" } },
+                    { title: { $regex: search, $options: "i" } },
+                ],
+            }).populate("creator");
+        }
+        res.status(200).json(listings);
+    } catch (err) {
+        res.status(404).json({ message: "Fail to fetch listings", error: err.message });
+        console.log(err);
+    }
+});
+
 router.get("/:listingId", async (req, res) => {
-    
+
     try {
         const { listingId } = req.params;
         const listing = await Listing.findById(listingId).populate("creator");
         res.status(200).json(listing);
-        
+
     } catch (err) {
         res.status(500).json({ message: "Error retrieving listing" });
         console.log(err);
     }
-})  
+})
 
 
 module.exports = router;
