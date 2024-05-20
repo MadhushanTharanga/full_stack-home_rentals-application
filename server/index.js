@@ -4,7 +4,10 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
+
+
 const authRoutes = require("./routes/auth");
+const listingRoutes = require("./routes/listing");
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +18,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/auth", authRoutes);
+app.use ("/properties", listingRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => {
