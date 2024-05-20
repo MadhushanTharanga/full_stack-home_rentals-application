@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "public/uploads/");
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, file.originalname);
     }
 });
@@ -21,16 +21,16 @@ const upload = multer({ storage });
 // Register
 
 router.post("/register", upload.single("profileImage"), async (req, res) => {
-    try{
+    try {
         const { firstName, lastName, email, password } = req.body;
         const profileImage = req.file
-        if(!profileImage) {
-            return res.status(400).send("Please add a profile image" );
+        if (!profileImage) {
+            return res.status(400).send("Please add a profile image");
         }
         const profileImagePath = profileImage.path;
 
         const existingUser = await User.findOne({ email });
-        if(existingUser) {
+        if (existingUser) {
             return res.status(400).json({ message: "User already exists" });
         }
 
@@ -47,14 +47,39 @@ router.post("/register", upload.single("profileImage"), async (req, res) => {
         await newUser.save();
         res.status(200).json({ message: "User created successfully", user: newUser });
 
-    } catch(err) {
-        res.status(500).json({message: "Registration failed !", error: err.message});
+    } catch (err) {
+        res.status(500).json({ message: "Registration failed !", error: err.message });
     }
 });
 
 
 
 // Login
+
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "User does not exist" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        delete user.password;
+
+        res.status(200).json({ message: "Login successful", token, user });
+
+
+    } catch (err) {
+        res.status(500).json({ message: "Login failed !", error: err.message });
+    }
+})
 
 
 module.exports = router;
