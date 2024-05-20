@@ -95,5 +95,18 @@ router.get("/", async (req, res) => {
     }
 })
 
+router.get("/:listingId", async (req, res) => {
+    
+    try {
+        const { listingId } = req.params;
+        const listing = await Listing.findById(listingId).populate("creator");
+        res.status(200).json(listing);
+        
+    } catch (err) {
+        res.status(500).json({ message: "Error retrieving listing" });
+        console.log(err);
+    }
+})  
+
 
 module.exports = router;

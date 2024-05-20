@@ -8,6 +8,7 @@ const dotenv = require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
 const listingRoutes = require("./routes/listing");
+const BookingRoutes = require("./routes/booking");
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 // Routes
 app.use("/auth", authRoutes);
 app.use ("/properties", listingRoutes);
+app.use("/booking", BookingRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => {
